@@ -21,8 +21,9 @@ public class RentalSystem {
     private RentalSystem() { loadData(); }
 
     public boolean addVehicle(Vehicle vehicle) {
-    	if (findVehicleByPlate(vehicle.getLicensePlate()).equals(null)) {
+    	if (findVehicleByPlate(vehicle.getLicensePlate()) == null) {
     		vehicles.add(vehicle);
+    		saveVehicle(vehicle);
     		return true;
     	}
     	return false;
@@ -45,7 +46,7 @@ public class RentalSystem {
     }
 
     public boolean addCustomer(Customer customer) {
-    	if(findCustomerById(customer.getCustomerId()).equals(null)) {
+    	if(findCustomerById(customer.getCustomerId()) == null) {
     		customers.add(customer);
         	saveCustomer(customer);
         	return true;
@@ -225,10 +226,12 @@ public class RentalSystem {
     			String recordType = recordInfo[4];
     			Vehicle vehicle = findVehicleByPlate(licensePlate);
     			Customer customer = findCustomerByName(customerName);
-    			if (recordType.equals("RENT"))
-    				vehicle.setStatus(Vehicle.VehicleStatus.RENTED);
-    			else if (recordType.equals("RETURN"))
-    				vehicle.setStatus(Vehicle.VehicleStatus.AVAILABLE);
+    			if (vehicle != null) {
+    				if (recordType.equals("RENT"))
+    					vehicle.setStatus(Vehicle.VehicleStatus.RENTED);
+    				else if (recordType.equals("RETURN"))
+    					vehicle.setStatus(Vehicle.VehicleStatus.AVAILABLE);
+    			}
     			RentalRecord record = new RentalRecord(vehicle, customer, date, totalAmount, recordType);
     			rentalHistory.addRecord(record);
     		}
