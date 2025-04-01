@@ -20,9 +20,12 @@ public class RentalSystem {
     // Private Constructor
     private RentalSystem() { loadData(); }
 
-    public void addVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
-        saveVehicle(vehicle);
+    public boolean addVehicle(Vehicle vehicle) {
+    	if (findVehicleByPlate(vehicle.getLicensePlate()).equals(null)) {
+    		vehicles.add(vehicle);
+    		return true;
+    	}
+    	return false;
     }
     
     public void saveVehicle(Vehicle vehicle) {
@@ -41,9 +44,13 @@ public class RentalSystem {
 		}
     }
 
-    public void addCustomer(Customer customer) {
-        customers.add(customer);
-        saveCustomer(customer);
+    public boolean addCustomer(Customer customer) {
+    	if(findCustomerById(customer.getCustomerId()).equals(null)) {
+    		customers.add(customer);
+        	saveCustomer(customer);
+        	return true;
+    	}
+    	return false;
     }
     
     public void saveCustomer(Customer customer) {

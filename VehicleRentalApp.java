@@ -49,8 +49,11 @@ public class VehicleRentalApp {
                     
                     if (vehicle != null){
 	                    vehicle.setLicensePlate(plate);
-	                    rentalSystem.addVehicle(vehicle);
-	                    System.out.println("Vehicle added.");
+	                    boolean success = rentalSystem.addVehicle(vehicle);
+	                    if (success)
+	                    	System.out.println("Vehicle added.");
+	                    else
+	                    	System.out.println("Error: Vehicle with license plate already exists");
                     }
                     else {
 	                    System.out.print("Vehicle not added.");
@@ -64,8 +67,11 @@ public class VehicleRentalApp {
                     System.out.print("Enter name: ");
                     String cname = scanner.nextLine();
 
-                    rentalSystem.addCustomer(new Customer(cid, cname));
-                    System.out.println("Customer added.");
+                    boolean success = rentalSystem.addCustomer(new Customer(cid, cname));
+                    if (success)
+                    	System.out.println("Customer added.");
+                    else
+                    	System.out.println("Error: Customer with Customer ID already exists");
                     break;
                     
                 case 3:
