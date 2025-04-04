@@ -28,6 +28,8 @@ public abstract class Vehicle {
     }
 
     public void setLicensePlate(String plate) {
+    	if (isValidPlate(plate) == false)
+    		throw new IllegalArgumentException("ERROR: Invalid license plate format.");
         this.licensePlate = plate == null ? null : plate.toUpperCase();
     }
 
@@ -53,4 +55,23 @@ public abstract class Vehicle {
     	return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
 
+    private boolean isValidPlate(String plate) {
+    	// Check if plate is null, empty or not the correct length
+    	if (plate == null || plate.length() != 6 || plate.isEmpty())
+    		return false;
+    	
+    	// Check if first three characters are letters
+    	for (int i = 0; i < 3; i++) {
+    		if (Character.isLetter(plate.charAt(i)) == false)
+    			return false;
+    	}
+    	
+    	// Check if last three characters are numbers
+    	for (int i = 3; i < 6; i++) {
+    		if (Character.isDigit(plate.charAt(i)) == false)
+    			return false;
+    	}
+    	
+    	return true;
+    }
 }

@@ -16,7 +16,6 @@ public class VehicleRentalApp {
                     System.out.println("  1: Car\n  2: Motorcycle\n  3: Truck");
                     int type = scanner.nextInt();
                     scanner.nextLine();
-
                     System.out.print("Enter license plate: ");
                     String plate = scanner.nextLine().toUpperCase();
                     System.out.print("Enter make: ");
@@ -48,7 +47,11 @@ public class VehicleRentalApp {
 		            }
                     
                     if (vehicle != null){
-	                    vehicle.setLicensePlate(plate);
+	                    try {
+							vehicle.setLicensePlate(plate);
+						} catch (IllegalArgumentException e) {
+							System.out.println(e.getMessage());
+						}
 	                    boolean success = rentalSystem.addVehicle(vehicle);
 	                    if (success)
 	                    	System.out.println("Vehicle added.");
