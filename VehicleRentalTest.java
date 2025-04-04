@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class VehicleRentalTest {
+public class VehicleRentalTest {
 	private Vehicle vehicle;
 	private Customer customer;
 	private RentalSystem rentalSystem;
